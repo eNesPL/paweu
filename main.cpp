@@ -81,12 +81,14 @@ int main() {
     vector<Pasazer> Baza;
     Baza = wczytaj(Baza);
     int odp;
-    while(true){
+    bool mango = true;
+    while(mango){
         odp=0;
         cout << "Wybierz opcje: " <<endl;
         cout << "1.Wyswietl" <<endl;
         cout << "2.Dodaj" <<endl;
         cout << "3.Usun" <<endl;
+        cout << "4.Wyjdz"<<endl;
         cin >> odp;
         switch(odp){
             case 1:
@@ -101,6 +103,10 @@ int main() {
                 cin >> odp;
                 Baza = usun(Baza,odp);
                 break;
+            case 4:
+                mango = false;
+                break;
+
         }
         zapisz(Baza);
     }
