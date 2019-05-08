@@ -6,11 +6,11 @@
 
 #include "Pasazer.h"
 using namespace std;
-
-const static string sciezka_do_pliku="D:\\baza.txt";
+const string sciezka_do_pliku = "D:\\baza.txt";
 
 void wypisz(vector<Pasazer>Baza){
-    for(int i=0;i<Baza.size();i++){
+    int g =Baza.size();
+    for(int i=0;i<g;i++){
         cout << "-------------"<<endl;
         cout << "NR:"+to_string(i+1)<<endl;
         cout << "Imie "+ Baza[i].imie<<endl;
@@ -18,6 +18,26 @@ void wypisz(vector<Pasazer>Baza){
         cout << "Lot "+ to_string(Baza[i].lot)<<endl;
         cout << "-------------"<<endl;
     }
+}
+void szukaj(const string &str,vector<Pasazer>Baza){
+    vector<Pasazer>temp;
+    int g=Baza.size();
+    for(int i=0;i<g;i++){
+            if(Baza[i].imie==str || Baza[i].nazwisko ==str){
+                temp.push_back(Baza[i]);
+            }
+    }
+    wypisz(temp);
+}
+void szukaj(int nr,vector<Pasazer>Baza){
+    vector<Pasazer>temp;
+    int g=Baza.size();
+    for(int i=0;i<g;i++){
+        if(Baza[i].lot==nr){
+            temp.push_back(Baza[i]);
+        }
+    }
+    wypisz(temp);
 }
 vector<Pasazer> usun(vector<Pasazer> Baza,int nr){
     Baza.erase(Baza.begin()+nr-1);
@@ -83,13 +103,15 @@ int main() {
     Baza = wczytaj(Baza);
     int odp;
     bool mango = true;
+    string stro;
     while(mango){
         odp=0;
         cout << "Wybierz opcje: " <<endl;
         cout << "1.Wyswietl" <<endl;
         cout << "2.Dodaj" <<endl;
         cout << "3.Usun" <<endl;
-        cout << "4.Wyjdz"<<endl;
+        cout << "4.Szukaj"<<endl;
+        cout << "Inne = wyscie z programu"<<endl;
         cin >> odp;
         switch(odp){
             case 1:
@@ -105,10 +127,29 @@ int main() {
                 Baza = usun(Baza,odp);
                 break;
             case 4:
-                mango = false;
+                cout << "Wybierz tryb szukania: "<<endl;
+                cout << "1. Po Imieniu lub Nazwisku"<<endl;
+                cout << "2. Po nr lotu"<<endl;
+                cout << "inne = Powrot"<<endl;
+                cin >> odp;
+                switch(odp){
+                    case 1:
+                        cout << " Podaj Imie lub Nazwisko: ";
+                        cin >> stro;
+                        szukaj(stro,Baza);
+                        break;
+                    case 2:
+                        cout << " Podaj nr lotu: ";
+                        cin >> odp;
+                        szukaj(odp,Baza);
+                        break;
+                    default:
+                        cout << "Powrot do menu"<<endl;
+                        break;
+                }
                 break;
             default:
-                cout << "Poza wyborem"<<endl;
+                mango = false;
                 break;
         }
         zapisz(Baza);
