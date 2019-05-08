@@ -11,7 +11,7 @@ const string sciezka_do_pliku="D:\\baza.txt";
 void wypisz(vector<Pasazer>Baza){
     for(int i=0;i<Baza.size();i++){
         cout << "-------------"<<endl;
-        cout << "NR:"+to_string(i)<<endl;
+        cout << "NR:"+to_string(i+1)<<endl;
         cout << "Imie "+ Baza[i].imie<<endl;
         cout << "Nazwisko "+ Baza[i].nazwisko<<endl;
         cout << "Lot "+ to_string(Baza[i].lot)<<endl;
@@ -19,7 +19,7 @@ void wypisz(vector<Pasazer>Baza){
     }
 }
 vector<Pasazer> usun(vector<Pasazer> Baza,int nr){
-    Baza.erase(Baza.begin()+nr);
+    Baza.erase(Baza.begin()+nr-1);
     cout << "Usunieto"<<endl;
     return Baza;
 }
