@@ -6,7 +6,8 @@
 
 #include "Pasazer.h"
 using namespace std;
-const string sciezka_do_pliku="D:\\baza.txt";
+
+const static string sciezka_do_pliku="D:\\baza.txt";
 
 void wypisz(vector<Pasazer>Baza){
     for(int i=0;i<Baza.size();i++){
@@ -28,8 +29,7 @@ vector<Pasazer> wczytaj(vector<Pasazer>Baza){
     string linia;
     Pasazer temp;
     plik.open(sciezka_do_pliku, ios::in);
-    int g;
-    if(plik.good() == true)
+    if(plik.good())
     {
         if (plik.peek() == std::ifstream::traits_type::eof() )
         {
@@ -39,7 +39,7 @@ vector<Pasazer> wczytaj(vector<Pasazer>Baza){
         while(!plik.eof())
         {
             getline(plik, linia);
-            if(linia==""){
+            if(linia.empty()){
                 return Baza;
             }
             temp.imie=linia;
@@ -56,7 +56,8 @@ vector<Pasazer> wczytaj(vector<Pasazer>Baza){
 void zapisz(vector<Pasazer>Baza){
     fstream plik;
     plik.open(sciezka_do_pliku,ios::out | ios::trunc);
-    for(int n=0;n<Baza.size();n++){
+    int g=Baza.size();
+    for(int n=0;n<g;n++){
         plik << Baza[n].imie <<endl;
         plik << Baza[n].nazwisko <<endl;
         plik << Baza[n].lot <<endl;
@@ -106,7 +107,9 @@ int main() {
             case 4:
                 mango = false;
                 break;
-
+            default:
+                cout << "Poza wyborem"<<endl;
+                break;
         }
         zapisz(Baza);
     }
